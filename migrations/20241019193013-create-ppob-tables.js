@@ -2,6 +2,59 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('users', {
+      id: {
+        type: Sequelize.BIGINT.UNSIGNED,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      email: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+        unique: true,
+        collate: 'utf8mb4_unicode_ci',
+      },
+      first_name: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        collate: 'utf8mb4_unicode_ci',
+      },
+      last_name: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        collate: 'utf8mb4_unicode_ci',
+      },
+      password: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+        collate: 'utf8mb4_unicode_ci',
+      },
+      profile_image: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        collate: 'utf8mb4_unicode_ci',
+      },
+      balance: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+        defaultValue: 0.00,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+      },
+    }, {
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_unicode_ci',
+    });
+
     await queryInterface.createTable('services', {
       id: {
         type: Sequelize.BIGINT.UNSIGNED,
@@ -124,59 +177,6 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: true,
         collate: 'utf8mb4_unicode_ci',
-      },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: true,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: true,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-      },
-    }, {
-      charset: 'utf8mb4',
-      collate: 'utf8mb4_unicode_ci',
-    });
-
-    await queryInterface.createTable('users', {
-      id: {
-        type: Sequelize.BIGINT.UNSIGNED,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      email: {
-        type: Sequelize.STRING(255),
-        allowNull: false,
-        unique: true,
-        collate: 'utf8mb4_unicode_ci',
-      },
-      first_name: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-        collate: 'utf8mb4_unicode_ci',
-      },
-      last_name: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-        collate: 'utf8mb4_unicode_ci',
-      },
-      password: {
-        type: Sequelize.STRING(255),
-        allowNull: false,
-        collate: 'utf8mb4_unicode_ci',
-      },
-      profile_image: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
-        collate: 'utf8mb4_unicode_ci',
-      },
-      balance: {
-        type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
-        defaultValue: 0.00,
       },
       created_at: {
         type: Sequelize.DATE,
