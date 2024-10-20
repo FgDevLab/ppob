@@ -43,11 +43,19 @@
    AWS_S3_BUCKET_NAME=
    ```
 
-4. **Run Database Migrations**
-   Make sure your database is running, then run the following command to apply migrations:
+4. **Run Database Migrations**  
+   Execute:
+
    ```bash
    pnpm run migrate
    ```
+
+   *If the migration script fails for any reason, you can manually apply the database schema using the provided [ddl.sql](/ddl.sql) file:*  
+
+   ```bash
+   mysql -u <DATABASE_USER> -p <DATABASE_NAME> < ./ddl.sql
+   ```
+
 
 5. **Start the Application**
    Start the application in development mode:
